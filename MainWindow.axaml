@@ -1,0 +1,51 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:local="clr-namespace:SteamVersionSelector"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="SteamVersionSelector.MainWindow"
+        Title="SteamVersionSelector">
+	<Window.DataContext>
+		<local:MainViewModel/>
+	</Window.DataContext>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>
+				<RowDefinition/>
+			</Grid.RowDefinitions>
+			<TextBlock Grid.Row="0" Text="Selected Blob:"/>
+			<TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding SelectedBlob.FileName}" />
+			<Button Grid.Row="0" Grid.Column="3" Content="Install Selected Blob" Command="{Binding LoadBlobCommand}"/>
+			<TextBlock Grid.Row="1" Text="Blob Path:"/>
+			<TextBox Grid.Row="1" Grid.Column="1" Text="{Binding SourceDirectory}"/>
+			<TextBlock Grid.Row="2" Text="Install Path"/>
+			<TextBox Grid.Row="2" Grid.Column="1" Text="{Binding TargetDirectory}" />
+			<TextBlock Grid.Row="3" Text="Cache Path:"/>
+			<TextBox Grid.Row="3" Grid.Column="1" Text="{Binding CacheDirectory}"/>
+		</Grid>
+		
+		<DataGrid Grid.Row="1" 
+				  Items="{Binding Blobs}" 
+				  SelectedItem="{Binding SelectedBlob}">
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="Blob Name" Binding="{Binding FileName}"/>
+				<DataGridTextColumn Header="File Date" Binding="{Binding FileDate}" />
+				<DataGridTextColumn Header="FirstBlob" Binding="{Binding FirstBlob.FileName}" />
+			</DataGrid.Columns>
+		</DataGrid>
+	</Grid>
+</Window>
