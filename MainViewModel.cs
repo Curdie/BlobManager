@@ -58,6 +58,11 @@ namespace SteamVersionSelector
             {
                 File.Delete(CacheDirectory);
             }
+            var orig = Path.Combine(TargetDirectory, "secondblob.orig");
+            if (File.Exists(orig))
+            {
+                File.Delete(orig);
+            }
         }, () => SelectedBlob != null);
         public string SourceDirectory { get; set; } = @"C:\Users\jon\Downloads\small_selection_of_blobs_with_timestamps";
         public string TargetDirectory { get; set; } = @"files\";
